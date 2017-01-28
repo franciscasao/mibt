@@ -1,0 +1,54 @@
+.logo-container {
+  padding: 1em;
+}
+.logo-container > img {
+  height: 250px;
+}
+.logo-container > h3 {
+  margin-top: 5px;
+  font-size: 20px;
+}
+@media screen and (min-width: 768px) {
+  .logo-container > img {
+    height: 300px;
+  }
+  .logo-container {
+    width: 60%;
+  }
+  .login-form {
+    width: 40%;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .logo-container {
+    padding: 30px;
+  }
+  .logo-container > img {
+    height: 400px;
+  }
+  .logo-container > h3 {
+    font-size: 32px;
+  }
+  .login-form {
+    padding-right: 3em;
+  }
+}
+
+label {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  color: #9A9A9A;
+}
+
+.btn.btn-primary {
+  width: 100%;
+  margin-bottom: 10px;
+  font-weight: 600;
+  padding: 8px 16px;
+}
+
+.modal .btn-primary {
+  width: initial;
+}
