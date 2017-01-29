@@ -24,39 +24,23 @@
   </head>
 
   <body>
-    <div class="flex-container">
-      <div class="box logo-container text-center">
-        <img src="assets/img/final_logo.png">
-      </div>
-      <div class="box login-form">
-        <h3 class="text-center" style="transition: 0.3s all ease;">Log in to your account.</h3>
-
+    <div class="content">
+      <div class="login-header text-center">
+        <img src="assets/img/logo/200px.png">
+        <h1>MCHL Institute of Business and Technology</h1>
         <?php if(!empty($error)): ?>
-        <div class="alert alert-danger fade in">
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <strong><?php echo $error; ?></strong>
-        </div>
+          <div class="alert alert-danger fade in">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <strong>Error</strong> <?php echo $error; ?>
+          </div>
         <?php endif; ?>
-
+        <div>Sign in to get started.</div>
         <?php echo form_open('/', array('style' => 'transition: 0.3s all ease;')); ?>
-          <div class="form-group">
-            <label>Employee ID</label>
-            <input type="text" name="emp_id" placeholder="ex. E201610001" class="form-control" value="<?php echo set_value('emp_id'); ?>" required>
-          </div>
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" name="password" placeholder="Password" class="form-control" required>
-          </div>
-          <div>
-            <input type="checkbox" name="remember" id="remember">
-            <label for="remember">Keep me logged in</label>
-          </div>
-          <div>
-            <button type="submit" class="btn btn-primary">Log In</button>
-            <p>Forgot password? Click <a role="button" data-toggle="modal" data-target=".modal">here.</a></p>
-          </div>
-        </form>
-
+          <input type="text" name="emp_id" placeholder="Employee ID" class="form-control" value="" required>
+          <input type="password" name="password" placeholder="Password" class="form-control" required>
+          <button type="submit" class="btn btn-primary">Sign In</button>
+        <?php echo form_close(); ?>
+        <a role="button" data-toggle="modal" data-target=".modal">Forgot Password?</a>
       </div>
     </div>
 
@@ -79,7 +63,7 @@
             <button type="button" class="btn btn-transparent" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Recover Password</button>
           </div>
-          </form>
+          <?php echo form_close(); ?>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->

@@ -20,11 +20,6 @@
   margin-bottom: 24px;
   width: 350px;
 }
-.alert {
-  width: 320px;
-  margin: 0 auto;
-  margin-bottom: 20px;
-}
 .login-header div {
   margin-bottom: 20px;
   font-weight: 300;
@@ -54,7 +49,7 @@
     font-weight: 400;
     margin-bottom: 15px;
   }
-  .form-control, .alert {
+  .form-control {
     width: 80%;
   }
 }
