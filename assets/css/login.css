@@ -59,14 +59,14 @@
   }
 }
 
-[type="submit"] {
+.btn-borderless {
   color: #bf2b23;
   font-size: 24px;
   background-color: transparent;
   border-color: transparent;
   margin-bottom: 10px;
 }
-[type="submit"]:hover {
+.btn-borderless:hover, .btn-borderless:focus, .btn-borderless:active {
   color: rgba(191, 43, 35, 0.7);
   border-color: transparent;
   background-color: transparent;

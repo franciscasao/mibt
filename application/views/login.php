@@ -31,14 +31,14 @@
         <?php if(!empty($error)): ?>
           <div class="alert alert-danger fade in">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <strong>Error</strong> <?php echo $error; ?>
+            <strong>Error!</strong> <?php echo $error; ?>
           </div>
         <?php endif; ?>
         <div>Sign in to get started.</div>
         <?php echo form_open('/', array('style' => 'transition: 0.3s all ease;')); ?>
           <input type="text" name="emp_id" placeholder="Employee ID" class="form-control" value="" required>
           <input type="password" name="password" placeholder="Password" class="form-control" required>
-          <button type="submit" class="btn btn-primary">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-borderless">Sign In</button>
         <?php echo form_close(); ?>
         <a role="button" data-toggle="modal" data-target=".modal">Forgot Password?</a>
       </div>
@@ -54,10 +54,9 @@
           </div>
           <?php echo form_open('forgot_password'); ?>
           <div class="modal-body">
-            <div class="form-group">
-              <label>Email</label>
-              <input type="email" name="email" class="form-control" placeholder="ex. jdelacruz@somewhere.com">
-            </div>
+            <!-- <div class="form-group"> -->
+              <input type="email" name="email" class="form-control" placeholder="Email">
+            <!-- </div> -->
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-transparent" data-dismiss="modal">Close</button>
