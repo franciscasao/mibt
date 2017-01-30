@@ -5,7 +5,7 @@
 <div class="content">
   <div class="row">
     <div class="col-xs-12 col-sm-6 col-md-4">
-      <div class="big-btn" onclick="window.location.href='<?php echo base_url('report/employee'); ?>'">
+      <div class="big-btn" data-toggle="modal" data-target="#choose_date">
         <div>Daily</div>
       </div>
     </div>

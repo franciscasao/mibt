@@ -5,7 +5,7 @@
       parent::__construct();
       $this->load->model('payment_model');
       $this->load->helper(array('form', 'url'));
-      $this->load->library(array('session', 'form_validation'));
+      $this->load->library(array('session', 'form_validation', 'pdf'));
 
       $this->form_validation->set_error_delimiters('<label class="error">', '</label>');
 
@@ -94,6 +94,9 @@
         $this->session->set_userdata(array('message' => "There was an error in deleting the payment. Kindly refer this to the administrator."));
 
       redirect(base_url('payment'));
+    }
+
+    public function daily_report() {
     }
   }
 

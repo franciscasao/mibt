@@ -25,6 +25,29 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+    <div class="modal fade" tabindex="-1" role="dialog" id="choose_date">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Choose Date</h4>
+            <p class="subtitle">Enter the date of the report you want to generate.</p>
+          </div>
+          <?php echo form_open('report/payment/daily'); ?>
+          <div class="modal-body">
+            <div class="form-group">
+              <input type="text" name="date" class="form-control datepicker" placeholder="Date">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-transparent" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Download Report</button>
+          </div>
+          <?php echo form_close(); ?>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

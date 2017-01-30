@@ -1,6 +1,6 @@
 <?php
-  echo date('Y-m-d');
-  // echo password_hash("superadmin", PASSWORD_DEFAULT);
+  // echo date('Y-m-d');
+  // echo password_hash("admin", PASSWORD_DEFAULT);
   // echo uniqid();
   // echo trim("E201610001", "E");
 
