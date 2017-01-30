@@ -28,6 +28,15 @@
       $this->load->view('reports/index', $data);
       $this->load->view('templates/footer', $data);
     }
+
+    public function payment($length = NULL) {
+      $data['tab'] = 'report';
+      $data['title'] = 'Reports | Payment';
+
+      $this->load->view('templates/header', $data);
+      $this->load->view('reports/payment', $data);
+      $this->load->view('templates/footer', $data);
+    }
   }
 
 ?>

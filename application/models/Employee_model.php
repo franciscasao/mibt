@@ -26,6 +26,7 @@
 
     public function new_id() {
       $this->db->select_max('id');
+      $this->db->not_like('id', '999999999');
       $query = $this->db->get('employee');
       $id = $query->row()->id;
 
@@ -144,6 +145,7 @@
         'salary' => $this->input->post('salary'),
         'address' => ucwords($this->input->post('address')),
         'authentication' => 'employee',
+        'date_employed' => date('Y-m-d'),
         'archive' => FALSE,
         'password' => password_hash($this->input->post('birthday'), PASSWORD_DEFAULT),
       );
