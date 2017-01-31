@@ -36,7 +36,7 @@
         <?php endif; ?>
         <div>Sign in to get started.</div>
         <?php echo form_open('/', array('style' => 'transition: 0.3s all ease;')); ?>
-          <input type="text" name="emp_id" placeholder="Employee ID" class="form-control" value="" required>
+          <input type="text" name="emp_id" placeholder="Employee ID" class="form-control" value="<?php echo set_value('emp_id'); ?>" required>
           <input type="password" name="password" placeholder="Password" class="form-control" required>
           <button type="submit" class="btn btn-primary btn-borderless">Sign In</button>
         <?php echo form_close(); ?>
