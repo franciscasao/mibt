@@ -32,9 +32,10 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
       $this->fpdf->SetFont('Open Sans', '', 10);
       $this->fpdf->Cell(0, 5, "As of ".date('F d, Y h:i A'), 0, 1, 'C', false);
 
-      $this->fpdf->SetFont('Open Sans','',12);
-      for($i=1;$i<=40;$i++)
-          $this->fpdf->Cell(0,10,'Printing line number '.$i,0,1);
+      $header = array('Country', 'Capital', 'Area (sq km)', 'Pop. (thousands)');
+      // Data loading
+      $data = $this->fpdf->LoadData(APPPATH.'third_party/fpdf/tutorial/countries.txt');
+      $this->fpdf->Table($header,$data);
 
       echo $this->fpdf->Output('hello_world.pdf','I');
     }
