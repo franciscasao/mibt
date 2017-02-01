@@ -25,17 +25,21 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
       // Title
       $this->fpdf->SetY(45);
-      $this->fpdf->SetFont('Open Sans', 'B', 18);
-      $this->fpdf->Cell(0, 8, strtoupper("Daily Payments Report"), 0, 1, 'C', false);
+      $this->fpdf->Title("Daily Payments Report");
 
       // Subtitle
-      $this->fpdf->SetFont('Open Sans', '', 10);
-      $this->fpdf->Cell(0, 5, "As of ".date('F d, Y h:i A'), 0, 1, 'C', false);
+      $this->fpdf->SetFont('Open Sans', '', 11);
+      $this->fpdf->Cell(0, 5, date('F d, Y'), 0, 1, 'C', false);
 
-      $header = array('Country', 'Capital', 'Area (sq km)', 'Pop. (thousands)');
-      // Data loading
+      $header = array('ID Number', 'Name', 'Amount');
+      $width = array(50, 80, 55);
       $data = $this->fpdf->LoadData(APPPATH.'third_party/fpdf/tutorial/countries.txt');
-      $this->fpdf->Table($header,$data);
+      $this->fpdf->Table($header, $data, $width);
+
+      // Summary
+      $this->fpdf->Cell(0, 5);
+      $this->fpdf->Ln();
+      $this->fpdf->Title("Summary");
 
       echo $this->fpdf->Output('hello_world.pdf','I');
     }

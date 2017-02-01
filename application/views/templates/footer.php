@@ -36,7 +36,7 @@
           <?php echo form_open('report/payment/daily'); ?>
           <div class="modal-body">
             <div class="form-group">
-              <input type="text" name="date" class="form-control datepicker" placeholder="Date">
+              <input type="text" name="report_date" class="form-control datepicker" placeholder="Date">
             </div>
           </div>
           <div class="modal-footer">

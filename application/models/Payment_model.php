@@ -30,6 +30,21 @@
       return $query->row_array();
     }
 
+    public function get_report_data($year, $month, $day) {
+      $date = $year.'-'.$month.'-'.$day;
+      $this->db->select('student.id, CONCAT(student.first_name, " ", student.last_name), payment.amount');
+      $this->db->from('payment');
+      $this->db->join('student', 'student.id = payment.student_id');
+      $this->db->where('payment.date_recorded', $date);
+
+      $query = $this->db->get();
+      return $query->result_array();
+    }
+
+    public function get_report_summary($year, $month, $day) {
+      
+    }
+
     public function get_year($latest = FALSE) {
       if($latest)
         $this->db->select_max('DATE_FORMAT(date_recorded, "%Y")', 'year');
