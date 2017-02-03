@@ -5,7 +5,7 @@
       parent::__construct();
       $this->load->model('payment_model');
       $this->load->helper(array('form', 'url'));
-      $this->load->library(array('session', 'form_validation', 'fpdf_lib'));
+      $this->load->library(array('session', 'form_validation'));
 
       $this->form_validation->set_error_delimiters('<label class="error">', '</label>');
 
@@ -94,42 +94,6 @@
         $this->session->set_userdata(array('message' => "There was an error in deleting the payment. Kindly refer this to the administrator."));
 
       redirect(base_url('payment'));
-    }
-
-    public function daily_report() {
-      $date = $this->input->post('report_date');
-      $date = new DateTime($date);
-
-      $this->fpdf->TopLogos();
-
-      // Title
-      $this->fpdf->SetY(45);
-      $this->fpdf->Title("Daily Payments Report");
-
-      // Subtitle
-      $this->fpdf->SetFont('Open Sans', '', 11);
-      $this->fpdf->Cell(0, 5, $date->format('F d, Y'), 0, 1, 'C', false);
-
-      $header = array('ID Number', 'Name', 'Amount');
-      $width = array(50, 80, 55);
-      $key = array('student_id', 'last_name', 'amount');
-
-      $tmp = $this->payment_model->get_report_data($date->format('Y'), $date->format('m'), $date->format('d'));
-      $data = array();
-      foreach($tmp as $row) {
-        $row['id'] = 'M'.$row['id'];
-        $row['amount'] = 'Php '.number_format($row['amount']);
-        array_push($data, array_values($row));
-      }
-
-      $this->fpdf->Table($header, $data, $width, $key);
-
-      // Summary
-      $this->fpdf->Cell(0, 5);
-      $this->fpdf->Ln();
-      $this->fpdf->Title("Summary");
-
-      echo $this->fpdf->Output('hello_world.pdf','I');
     }
   }
 

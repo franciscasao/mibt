@@ -33,7 +33,7 @@
             <h4 class="modal-title">Choose Date</h4>
             <p class="subtitle">Enter the date of the report you want to generate.</p>
           </div>
-          <?php echo form_open('report/payment/daily'); ?>
+          <?php echo form_open('report/financial/daily'); ?>
           <div class="modal-body">
             <div class="form-group">
               <input type="text" name="report_date" class="form-control datepicker" placeholder="Date">

@@ -27,8 +27,7 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
       $this->fpdf->SetY(45);
       $this->fpdf->Title("Daily Payments Report");
 
-      // Subtitle
-      $this->fpdf->SetFont('Open Sans', '', 11);
+      // Date
       $this->fpdf->Cell(0, 5, date('F d, Y'), 0, 1, 'C', false);
 
       $header = array('ID Number', 'Name', 'Amount');
@@ -37,9 +36,12 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
       $this->fpdf->Table($header, $data, $width);
 
       // Summary
-      $this->fpdf->Cell(0, 5);
-      $this->fpdf->Ln();
-      $this->fpdf->Title("Summary");
+      // $this->fpdf->Cell(0, 5);
+      // $this->fpdf->Ln();
+      // $this->fpdf->Title("Summary"); 
+      $this->fpdf->Cell(50, 8, 'Total', 0, 0);
+      $this->fpdf->Cell(80, 8, '38 Payments', 0, 0);
+      $this->fpdf->Cell(55, 8, 'Php 72,000.50', 0, 0);
 
       echo $this->fpdf->Output('hello_world.pdf','I');
     }

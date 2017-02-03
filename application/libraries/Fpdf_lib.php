@@ -22,31 +22,41 @@ class PDF extends FPDF {
   public function Title($txt) {    
     $this->SetFont('Open Sans', 'B', 18);
     $this->Cell(0, 8, strtoupper($txt), 0, 1, 'C', false);
+    $this->SetFont('Open Sans', '', 11);
+  }
+
+  public function Subtitle($txt) {
+    $this->SetFont('Open Sans', 'B', 14);
+    $this->Cell(0, 8, strtoupper($txt), 0, 1, 'L', false);
+    $this->SetFont('Open Sans', '', 11);
   }
 
   public function Table($header, $data, $width) {
     $this->SetFont('Open Sans','B');
 
-    $this->Ln();
     for($i=0; $i < count($header); $i++)
       $this->Cell($width[$i], 8, $header[$i], 0, 0, 'L', false);
     $this->Ln();
 
-    $this->Cell(array_sum($width), 0, '', 'T', 1);
 
     $this->SetFillColor(245, 245, 245);
     $this->SetTextColor(0);
-    $this->SetFont('');
+    $this->SetFont('Open Sans');
     
-    $fill = false;
-    foreach($data as $row) {
-      for($i=0; $i < count($header); $i++)
-        $this->Cell($width[$i], 8, $row[$i], 0, 0, 'L', $fill);
-      $this->Ln();
-      $fill = !$fill;
-    }
+    if(empty($data))
+      $this->Cell(0, 8, "No data available.", 'T', 1, 'C', true);
+    else {
+      $this->Cell(array_sum($width), 0, '', 'T', 1);
+      $fill = false;
+      foreach($data as $row) {
+        for($i=0; $i < count($header); $i++)
+          $this->Cell($width[$i], 8, $row[$i], 0, 0, 'L', $fill);
+        $this->Ln();
+        $fill = !$fill;
+      }
 
-    $this->Cell(array_sum($width), 0, '', 'T', 1);
+      $this->Cell(array_sum($width), 0, '', 'T', 1);
+    }
   }
 
   public function Footer() {

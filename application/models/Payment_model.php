@@ -41,10 +41,6 @@
       return $query->result_array();
     }
 
-    public function get_report_summary($year, $month, $day) {
-      
-    }
-
     public function get_year($latest = FALSE) {
       if($latest)
         $this->db->select_max('DATE_FORMAT(date_recorded, "%Y")', 'year');

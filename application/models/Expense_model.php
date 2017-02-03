@@ -97,5 +97,16 @@
     public function delete() {
       return $this->db->delete( 'expense', array('id' => $this->input->post('id')) );
     }
+
+    public function get_report_data($year, $month, $day) {
+      $date = $year.'-'.$month.'-'.$day;
+      $this->db->select('employee.id, expense.details, expense.receipt_no, expense.amount');
+      $this->db->from('expense');
+      $this->db->join('employee', 'employee.id = expense.employee_id');
+      $this->db->where('expense.date_recorded', $date);
+
+      $query = $this->db->get();
+      return $query->result_array();
+    }
   }
 ?>
