@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="col-xs-12 col-sm-6 col-md-4">
-      <div class="big-btn" data-toggle="modal" data-target="#choose_date" data-duration="monthly" data-min="2017" data-max="2017">
+      <div class="big-btn" data-toggle="modal" data-target="#choose_date" data-duration="monthly" data-min="2015" data-max="2017">
         <div>Monthly</div>
       </div>
     </div>

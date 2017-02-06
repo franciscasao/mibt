@@ -104,13 +104,16 @@
       $month = $this->input->post('month');
       $day = $this->input->post('day');
 
-      $this->db->select('employee.id, expense.details, expense.receipt_no, expense.amount');
+      $this->db->select('employee.id, expense.details, expense.receipt_no, expense.amount, expense.date_recorded');
       $this->db->from('expense');
       $this->db->join('employee', 'employee.id = expense.employee_id');
 
       if($duration == 'daily')
         $this->db->where('expense.date_recorded', $year.'-'.$month.'-'.$day);
-      else if ($duration == 'monthly')
+      else if ($duration == 'monthly') {
+        $this->db->where('expense.date_recorded BETWEEN "'.$year.'-'.$month.'-01" AND "'.$year.'-'.$month.'-31"');
+        $this->db->order_by('expense.date_recorded', 'ASC');
+      }
 
       $query = $this->db->get();
       return $query->result_array();

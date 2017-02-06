@@ -33,7 +33,7 @@
             <h4 class="modal-title">Choose Date</h4>
             <p class="subtitle">Enter the date of the report you want to generate.</p>
           </div>
-          <?php echo form_open('report/financial/daily'); ?>
+          <?php echo form_open('report/generate'); ?>
           <input type="hidden" name="duration">
           <div class="modal-body"></div>
           <div class="modal-footer">
@@ -183,7 +183,7 @@
           var row = document.createElement('div');
           row.className = 'row';
 
-          $(this).find('input[name="duration"]').val(btn.data('duration')); 
+          $(this).find('input[name="duration"]').val(btn.data('duration'));
 
           if(btn.data('duration') == 'daily') {
             row.appendChild(createMonthSelect('col-xs-12 col-sm-6 col-md-4'));

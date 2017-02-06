@@ -30,12 +30,22 @@
       return $query->row_array();
     }
 
-    public function get_report_data($year, $month, $day) {
-      $date = $year.'-'.$month.'-'.$day;
-      $this->db->select('student.id, CONCAT(student.first_name, " ", student.last_name), payment.amount');
+    public function get_report_data() {
+      $duration = $this->input->post('duration');
+      $year = $this->input->post('year');
+      $month = $this->input->post('month');
+      $day = $this->input->post('day');
+
+      $this->db->select('student.id, CONCAT(student.first_name, " ", student.last_name), payment.amount, payment.date_recorded');
       $this->db->from('payment');
       $this->db->join('student', 'student.id = payment.student_id');
-      $this->db->where('payment.date_recorded', $date);
+
+      if($duration == 'daily')
+        $this->db->where('payment.date_recorded', $year.'-'.$month.'-'.$day);
+      else if($duration == 'monthly') {
+        $this->db->where('payment.date_recorded BETWEEN "'.$year.'-'.$month.'-01" AND "'.$year.'-'.$month.'-31"');
+        $this->db->order_by('payment.date_recorded', 'ASC');
+      }
 
       $query = $this->db->get();
       return $query->result_array();
