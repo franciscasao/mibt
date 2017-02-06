@@ -206,7 +206,7 @@
 
       $this->fpdf->Table($header, $data, $width);
 
-      return $this->fpdf->Output($date->format('F Y').' Financial Report.pdf', 'I');
+      return $this->fpdf->Output($date->format('F Y').' Financial Report.pdf', 'D');
     }
 
     public function annual_report() {
@@ -281,7 +281,7 @@
 
       $this->fpdf->Table($header, $data, $width);
 
-      return $this->fpdf->Output($year.' Financial Report.pdf', 'I');
+      return $this->fpdf->Output($year.' Financial Report.pdf', 'D');
     }
   }
 
