@@ -104,7 +104,7 @@
       $month = $this->input->post('month');
       $day = $this->input->post('day');
 
-      $this->db->select('employee.id, expense.details, expense.receipt_no, expense.amount, expense.date_recorded');
+      $this->db->select('CONCAT(employee.first_name, " ", employee.last_name), expense.details, expense.receipt_no, expense.amount, expense.date_recorded');
       $this->db->from('expense');
       $this->db->join('employee', 'employee.id = expense.employee_id');
 
@@ -114,6 +114,19 @@
         $this->db->where('expense.date_recorded BETWEEN "'.$year.'-'.$month.'-01" AND "'.$year.'-'.$month.'-31"');
         $this->db->order_by('expense.date_recorded', 'ASC');
       }
+
+      $query = $this->db->get();
+      return $query->result_array();
+    }
+
+    public function get_annual_data() {
+      $year = $this->input->post('year');
+
+      $this->db->select('DATE_FORMAT(date_recorded, "%m") AS "month", COUNT(amount) AS "count", SUM(amount) AS "sum"');
+      $this->db->from('expense');
+      $this->db->where('DATE_FORMAT(date_recorded, "%Y") =', $year);
+      $this->db->group_by('month');
+      $this->db->order_by('month', 'ASC');
 
       $query = $this->db->get();
       return $query->result_array();

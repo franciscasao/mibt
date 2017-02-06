@@ -51,6 +51,19 @@
       return $query->result_array();
     }
 
+    public function get_annual_data() {
+      $year = $this->input->post('year');
+
+      $this->db->select('DATE_FORMAT(date_recorded, "%m") AS "month", COUNT(amount) AS "count", SUM(amount) AS "sum"');
+      $this->db->from('payment');
+      $this->db->where('DATE_FORMAT(date_recorded, "%Y") =', $year);
+      $this->db->group_by('month');
+      $this->db->order_by('month', 'ASC');
+
+      $query = $this->db->get();
+      return $query->result_array();
+    }
+
     public function get_year($latest = FALSE) {
       if($latest)
         $this->db->select_max('DATE_FORMAT(date_recorded, "%Y")', 'year');
