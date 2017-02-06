@@ -98,12 +98,19 @@
       return $this->db->delete( 'expense', array('id' => $this->input->post('id')) );
     }
 
-    public function get_report_data($year, $month, $day) {
-      $date = $year.'-'.$month.'-'.$day;
+    public function get_report_data() {
+      $duration = $this->input->post('duration');
+      $year = $this->input->post('year');
+      $month = $this->input->post('month');
+      $day = $this->input->post('day');
+
       $this->db->select('employee.id, expense.details, expense.receipt_no, expense.amount');
       $this->db->from('expense');
       $this->db->join('employee', 'employee.id = expense.employee_id');
-      $this->db->where('expense.date_recorded', $date);
+
+      if($duration == 'daily')
+        $this->db->where('expense.date_recorded', $year.'-'.$month.'-'.$day);
+      else if ($duration == 'monthly')
 
       $query = $this->db->get();
       return $query->result_array();

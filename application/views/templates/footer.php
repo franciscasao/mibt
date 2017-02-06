@@ -34,11 +34,8 @@
             <p class="subtitle">Enter the date of the report you want to generate.</p>
           </div>
           <?php echo form_open('report/financial/daily'); ?>
-          <div class="modal-body">
-            <div class="form-group">
-              <input type="text" name="report_date" class="form-control datepicker" placeholder="Date">
-            </div>
-          </div>
+          <input type="hidden" name="duration">
+          <div class="modal-body"></div>
           <div class="modal-footer">
             <button type="button" class="btn btn-transparent" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Download Report</button>
@@ -91,7 +88,117 @@
 
       var $employee = $('#employee');
 
+      function createMonthSelect(className) {
+        var d = new Date();
+        var month = document.createElement('div');
+        month.className = className;
+
+        var form_group = document.createElement('div');
+        form_group.className = 'form-group';
+        month.appendChild(form_group);
+
+        var label = document.createElement('label');
+        label.textContent = 'Month';
+        form_group.appendChild(label);
+
+        var select = document.createElement('select');
+        select.className = 'form-control';
+        select.name = 'month';
+        var data = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        for (var i = 0; i < 12; i++) {
+          var option = document.createElement('option');
+          option.text = data[i];
+          option.value = i + 1;
+
+          if(d.getMonth() == i)
+            option.setAttribute('selected', 'selected');
+
+          select.add(option)
+        }
+        form_group.appendChild(select);
+
+        return month;
+      }
+
+      function createDayInput(className) {
+        var d = new Date();
+        var day = document.createElement('div');
+        day.className = className;
+
+        var form_group = document.createElement('div');
+        form_group.className = 'form-group';
+        day.appendChild(form_group);
+
+        var label = document.createElement('label');
+        label.textContent = 'Day';
+        form_group.appendChild(label);
+
+        var input = document.createElement('input');
+        input.className = 'form-control';
+        input.type = 'text';
+        input.placeholder = 'ex. 15';
+        input.value = d.getDate();
+        input.name = 'day';
+        form_group.appendChild(input);
+
+        return day;
+      }
+
+      function createYearSelect(className, min, max) {
+        var d = new Date();
+
+        var year = document.createElement('div');
+        year.className = className;
+
+        var form_group = document.createElement('div');
+        form_group.className = 'form-group';
+        year.appendChild(form_group);
+
+        var label = document.createElement('label');
+        label.textContent = 'Year';
+        form_group.appendChild(label);
+
+        var select = document.createElement('select');
+        select.className = 'form-control';
+        select.name = 'year';
+        for (var i = 0; i <= max - min; i++) {
+          var option = document.createElement('option');
+          option.text = min + i;
+          option.value = min + i;
+
+          if(d.getFullYear() == min + i)
+            option.setAttribute('selected', 'selected');
+
+          select.add(option)
+        }
+        form_group.appendChild(select);
+
+        return year;
+      }
+
       $(window).ready(function(){
+        $('#choose_date').on('shown.bs.modal', function(e) {
+          var btn = $(e.relatedTarget);
+
+          var row = document.createElement('div');
+          row.className = 'row';
+
+          $(this).find('input[name="duration"]').val(btn.data('duration')); 
+
+          if(btn.data('duration') == 'daily') {
+            row.appendChild(createMonthSelect('col-xs-12 col-sm-6 col-md-4'));
+            row.appendChild(createDayInput('col-xs-12 col-sm-6 col-md-4'));
+            row.appendChild(createYearSelect('col-xs-12 col-sm-6 col-md-4', btn.data('min'), btn.data('max')));
+          } else if (btn.data('duration') == 'monthly') {            
+            row.appendChild(createMonthSelect('col-sm-6'));
+            row.appendChild(createYearSelect('col-sm-6', btn.data('min'), btn.data('max')));
+          } else if (btn.data('duration') == 'annually') {
+            row.appendChild(createYearSelect('col-xs-12', btn.data('min'), btn.data('max')));
+          }
+
+          $(this).find('.modal-body').html(row);
+        });
+
         $employee.bootstrapTable({
           search: true,
           showToggle: true,

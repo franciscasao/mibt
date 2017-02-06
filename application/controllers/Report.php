@@ -40,8 +40,7 @@
     }
 
     public function financial_report() {
-      $date = $this->input->post('report_date');
-      $date = new DateTime($date);
+      $date = new DateTime();
 
       $this->fpdf->TopLogos();
 
@@ -57,7 +56,7 @@
       $header = array('', 'Student ID', 'Name', 'Amount');
       $width = array(10, 40, 85, 55);
 
-      $tmp = $this->payment_model->get_report_data($date->format('Y'), $date->format('m'), $date->format('d'));
+      $tmp = $this->payment_model->get_report_data();
       $data = array();
       $count = 1;
       $payment_total = 0;
@@ -80,7 +79,7 @@
       $header = array('', 'Employee ID', 'Details', 'Recipt No.', 'Amount');
       $width = array(10, 30, 65, 50, 35);
 
-      $tmp = $this->expense_model->get_report_data($date->format('Y'), $date->format('m'), $date->format('d'));
+      $tmp = $this->expense_model->get_report_data();
       $data = array();
       $count = 1;
       $expense_total = 0;
@@ -113,7 +112,7 @@
 
       $this->fpdf->Table($header, $data, $width);
 
-      echo $this->fpdf->Output('hello_world.pdf','I');
+      // echo $this->fpdf->Output('hello_world.pdf','I');
     }
   }
 

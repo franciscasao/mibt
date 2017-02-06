@@ -55,7 +55,10 @@ class PDF extends FPDF {
         $fill = !$fill;
       }
 
-      $this->Cell(array_sum($width), 0, '', 'T', 1);
+      if(count($data) == 1)
+        $this->Cell(array_sum($width), 0, '', 0, 1);
+      else
+        $this->Cell(array_sum($width), 0, '', 'T', 1);
     }
   }
 
